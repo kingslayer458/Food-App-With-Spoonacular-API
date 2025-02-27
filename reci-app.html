@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+        }
+        
+        .search-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .search-filters {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        input, select, button {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #4ecdc4;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #36b5ac;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            margin-right: 5px;
+        }
+        
+        .tab.active {
+            background-color: white;
+            border-bottom: 1px solid white;
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .recipe-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .recipe-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .recipe-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .recipe-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .recipe-details {
+            padding: 15px;
+        }
+        
+        .recipe-title {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .recipe-description {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .recipe-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        .btn-favorite {
+            background-color: #ff8a5b;
+        }
+        
+        .btn-plan {
+            background-color: #6a5acd;
+        }
+        
+        .meal-plan {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .day-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .day-selector button {
+            min-width: 100px;
+            text-align: center;
+        }
+        
+        .meal-slot {
+            border: 1px dashed #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+        
+        .meal-slot h3 {
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .meal-slot-content {
+            min-height: 100px;
+        }
+        
+        .meal-recipe {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .meal-recipe img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        
+        .nutritional-summary {
+            background-color: #4ecdc4;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .nutritional-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .nutritional-item {
+            background-color: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Kingplay Explorer</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('search')">Recipe Search</div>
+            <div class="tab" onclick="showTab('meal-planning')">Meal Planning</div>
+            <div class="tab" onclick="showTab('favorites')">Favorites</div>
+        </div>
+        
+        <div id="search" class="tab-content active">
+            <div class="search-section">
+                <input type="text" id="searchQuery" placeholder="Search recipes...">
+                <div class="search-filters">
+                    <select id="cuisine">
+                        <option value="">Any Cuisine</option>
+                        <option value="italian">Italian</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="indian">Indian</option>
+                        <option value="chinese">Chinese</option>
+                        <option value="american">American</option>
+                        <option value="thai">Thai</option>
+                        <option value="japanese">Japanese</option>
+                        <option value="mediterranean">Mediterranean</option>
+                    </select>
+                    
+                    <select id="diet">
+                        <option value="">Any Diet</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="gluten-free">Gluten Free</option>
+                        <option value="ketogenic">Ketogenic</option>
+                        <option value="paleo">Paleo</option>
+                    </select>
+                    
+                    <input type="text" id="includeIngredients" placeholder="Include ingredients (comma-separated)">
+                    
+                    <select id="maxReadyTime">
+                        <option value="">Any Prep Time</option>
+                        <option value="15">15 minutes or less</option>
+                        <option value="30">30 minutes or less</option>
+                        <option value="60">1 hour or less</option>
+                    </select>
+                </div>
+                <button onclick="searchRecipes()">Search Recipes</button>
+            </div>
+            
+            <div id="recipes" class="recipe-grid"></div>
+        </div>
+        
+        <div id="meal-planning" class="tab-content">
+            <div class="meal-plan">
+                <h2>Weekly Meal Planner</h2>
+                
+                <div class="day-selector">
+                    <button onclick="selectDay('monday')" class="active">Monday</button>
+                    <button onclick="selectDay('tuesday')">Tuesday</button>
+                    <button onclick="selectDay('wednesday')">Wednesday</button>
+                    <button onclick="selectDay('thursday')">Thursday</button>
+                    <button onclick="selectDay('friday')">Friday</button>
+                    <button onclick="selectDay('saturday')">Saturday</button>
+                    <button onclick="selectDay('sunday')">Sunday</button>
+                </div>
+                
+                <div class="day-plan" id="monday">
+                    <div class="meal-slot">
+                        <h3>Breakfast <button class="btn-small" onclick="clearMeal('monday', 'breakfast')">Clear</button></h3>
+                        <div class="meal-slot-content" id="monday-breakfast"></div>
+                    </div>
+                    
+                    <div class="meal-slot">
+                        <h3>Lunch <button class="btn-small" onclick="clearMeal('monday', 'lunch')">Clear</button></h3>
+                        <div class="meal-slot-content" id="monday-lunch"></div>
+                    </div>
+                    
+                    <div class="meal-slot">
+                        <h3>Dinner <button class="btn-small" onclick="clearMeal('monday', 'dinner')">Clear</button></h3>
+                        <div class="meal-slot-content" id="monday-dinner"></div>
+                    </div>
+                    
+                    <div class="nutritional-summary">
+                        <h3>Daily Nutrition Summary</h3>
+                        <div class="nutritional-details">
+                            <div class="nutritional-item">
+                                <div>Calories</div>
+                                <div><span id="monday-calories">0</span> kcal</div>
+                            </div>
+                            <div class="nutritional-item">
+                                <div>Protein</div>
+                                <div><span id="monday-protein">0</span> g</div>
+                            </div>
+                            <div class="nutritional-item">
+                                <div>Carbs</div>
+                                <div><span id="monday-carbs">0</span> g</div>
+                            </div>
+                            <div class="nutritional-item">
+                                <div>Fat</div>
+                                <div><span id="monday-fat">0</span> g</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="favorites" class="tab-content">
+            <h2>Your Favorite Recipes</h2>
+            <div id="favorites-list" class="favorites-grid">
+                <div class="empty-state">
+                    <h3>No favorites yet</h3>
+                    <p>Search for recipes and add them to your favorites!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // API Key
+        const apiKey = 'd506112d90aa44659f14782218b86079';
+        
+        // Store for favorites and meal plans
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        let mealPlan = JSON.parse(localStorage.getItem('mealPlan')) || {
+            monday: { breakfast: null, lunch: null, dinner: null },
+            tuesday: { breakfast: null, lunch: null, dinner: null },
+            wednesday: { breakfast: null, lunch: null, dinner: null },
+            thursday: { breakfast: null, lunch: null, dinner: null },
+            friday: { breakfast: null, lunch: null, dinner: null },
+            saturday: { breakfast: null, lunch: null, dinner: null },
+            sunday: { breakfast: null, lunch: null, dinner: null }
+        };
+        
+        // Tab management
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+            
+            if (tabId === 'favorites') {
+                renderFavorites();
+            }
+            
+            if (tabId === 'meal-planning') {
+                renderMealPlan('monday');
+            }
+        }
+        
+        // Search recipes with filters
+        function searchRecipes() {
+            const query = document.getElementById('searchQuery').value;
+            const cuisine = document.getElementById('cuisine').value;
+            const diet = document.getElementById('diet').value;
+            const includeIngredients = document.getElementById('includeIngredients').value;
+            const maxReadyTime = document.getElementById('maxReadyTime').value;
+            
+            let url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=12`;
+            
+            if (query) url += `&query=${query}`;
+            if (cuisine) url += `&cuisine=${cuisine}`;
+            if (diet) url += `&diet=${diet}`;
+            if (includeIngredients) url += `&includeIngredients=${includeIngredients}`;
+            if (maxReadyTime) url += `&maxReadyTime=${maxReadyTime}`;
+            
+            // Add additional info we need
+            url += '&addRecipeInformation=true&addRecipeNutrition=true';
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const recipesDiv = document.getElementById('recipes');
+                    recipesDiv.innerHTML = '';
+                    
+                    if (data.results.length === 0) {
+                        recipesDiv.innerHTML = `
+                            <div class="empty-state">
+                                <h3>No recipes found</h3>
+                                <p>Try adjusting your search criteria</p>
+                            </div>
+                        `;
+                        return;
+                    }
+                    
+                    data.results.forEach(recipe => {
+                        const recipeElement = document.createElement('div');
+                        recipeElement.classList.add('recipe-card');
+                        
+                        // Check if this recipe is already in favorites
+                        const isFavorite = favorites.some(fav => fav.id === recipe.id);
+                        
+                        const cookTime = recipe.readyInMinutes || 'Unknown';
+                        const servings = recipe.servings || '1';
+                        const calories = recipe.nutrition ? 
+                            Math.round(recipe.nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0) :
+                            'N/A';
+                        
+                        recipeElement.innerHTML = `
+                            <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
+                            <div class="recipe-details">
+                                <h3 class="recipe-title">${recipe.title}</h3>
+                                <p class="recipe-description">${recipe.summary ? recipe.summary.split('. ')[0] + '.' : ''}</p>
+                                <div class="recipe-meta">
+                                    <span>⏱️ ${cookTime} min</span>
+                                    <span>👥 ${servings} servings</span>
+                                    <span>🔥 ${calories} cal</span>
+                                </div>
+                                <div class="action-buttons">
+                                    <button class="btn-small btn-favorite" onclick="toggleFavorite(${recipe.id})">${isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</button>
+                                    <button class="btn-small btn-plan" onclick="showAddToMealPlanModal(${recipe.id})">Add to Meal Plan</button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        recipesDiv.appendChild(recipeElement);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching recipes:', error);
+                    document.getElementById('recipes').innerHTML = `
+                        <div class="empty-state">
+                            <h3>Error loading recipes</h3>
+                            <p>There was a problem with the recipe service. Please try again later.</p>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Toggle favorite status
+        function toggleFavorite(recipeId) {
+            const existingIndex = favorites.findIndex(fav => fav.id === recipeId);
+            
+            if (existingIndex > -1) {
+                // Remove from favorites
+                favorites.splice(existingIndex, 1);
+            } else {
+                // Add to favorites
+                fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`)
+                    .then(response => response.json())
+                    .then(recipe => {
+                        favorites.push({
+                            id: recipe.id,
+                            title: recipe.title,
+                            image: recipe.image,
+                            readyInMinutes: recipe.readyInMinutes,
+                            servings: recipe.servings,
+                            summary: recipe.summary,
+                            nutrition: recipe.nutrition
+                        });
+                        saveAndUpdateFavorites();
+                    });
+                return;
+            }
+            
+            saveAndUpdateFavorites();
+        }
+        
+        function saveAndUpdateFavorites() {
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            if (document.getElementById('favorites').classList.contains('active')) {
+                renderFavorites();
+            }
+            
+            // Also update the search results if visible
+            if (document.getElementById('search').classList.contains('active')) {
+                searchRecipes();
+            }
+        }
+        
+        // Render favorites list
+        function renderFavorites() {
+            const favoritesList = document.getElementById('favorites-list');
+            favoritesList.innerHTML = '';
+            
+            if (favorites.length === 0) {
+                favoritesList.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No favorites yet</h3>
+                        <p>Search for recipes and add them to your favorites!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            favorites.forEach(recipe => {
+                const recipeElement = document.createElement('div');
+                recipeElement.classList.add('recipe-card');
+                
+                const calories = recipe.nutrition ? 
+                    Math.round(recipe.nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0) :
+                    'N/A';
+                
+                recipeElement.innerHTML = `
+                    <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
+                    <div class="recipe-details">
+                        <h3 class="recipe-title">${recipe.title}</h3>
+                        <p class="recipe-description">${recipe.summary ? recipe.summary.split('. ')[0] + '.' : ''}</p>
+                        <div class="recipe-meta">
+                            <span>⏱️ ${recipe.readyInMinutes || 'Unknown'} min</span>
+                            <span>👥 ${recipe.servings || '1'} servings</span>
+                            <span>🔥 ${calories} cal</span>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn-small btn-favorite" onclick="toggleFavorite(${recipe.id})">Remove from Favorites</button>
+                            <button class="btn-small btn-plan" onclick="showAddToMealPlanModal(${recipe.id})">Add to Meal Plan</button>
+                        </div>
+                    </div>
+                `;
+                
+                favoritesList.appendChild(recipeElement);
+            });
+        }
+        
+        // Meal Planning Functions
+        function selectDay(day) {
+            document.querySelectorAll('.day-selector button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.day-selector button[onclick="selectDay('${day}')"]`).classList.add('active');
+            renderMealPlan(day);
+        }
+        
+        function showAddToMealPlanModal(recipeId) {
+            // For simplicity, we'll just prompt for the day and meal
+            const day = prompt("Which day? (monday, tuesday, wednesday, thursday, friday, saturday, sunday)").toLowerCase();
+            if (!day || !Object.keys(mealPlan).includes(day)) {
+                alert("Invalid day selected");
+                return;
+            }
+            
+            const meal = prompt("Which meal? (breakfast, lunch, dinner)").toLowerCase();
+            if (!meal || !Object.keys(mealPlan[day]).includes(meal)) {
+                alert("Invalid meal selected");
+                return;
+            }
+            
+            addToMealPlan(recipeId, day, meal);
+        }
+        
+        function addToMealPlan(recipeId, day, meal) {
+            fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`)
+                .then(response => response.json())
+                .then(recipe => {
+                    mealPlan[day][meal] = {
+                        id: recipe.id,
+                        title: recipe.title,
+                        image: recipe.image,
+                        readyInMinutes: recipe.readyInMinutes,
+                        servings: recipe.servings,
+                        nutrition: recipe.nutrition
+                    };
+                    
+                    localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+                    
+                    // Update the UI if the meal plan tab is active
+                    if (document.getElementById('meal-planning').classList.contains('active')) {
+                        renderMealPlan(day);
+                    }
+                });
+        }
+        
+        function clearMeal(day, meal) {
+            mealPlan[day][meal] = null;
+            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+            
+            // Update the UI
+            renderMealPlan(day);
+        }
+        
+        function renderMealPlan(day) {
+            const dayPlan = mealPlan[day];
+            
+            // Render each meal slot
+            ['breakfast', 'lunch', 'dinner'].forEach(meal => {
+                const slotElement = document.getElementById(`${day}-${meal}`);
+                
+                if (dayPlan[meal]) {
+                    const recipe = dayPlan[meal];
+                    slotElement.innerHTML = `
+                        <div class="meal-recipe">
+                            <img src="${recipe.image}" alt="${recipe.title}">
+                            <div>
+                                <h4>${recipe.title}</h4>
+                                <div>⏱️ ${recipe.readyInMinutes || 'Unknown'} min • 👥 ${recipe.servings || '1'} servings</div>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    slotElement.innerHTML = `
+                        <div class="empty-state">
+                            <p>No meal planned - add one from recipes or favorites</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            // Calculate and update nutrition summary
+            let totalCalories = 0;
+            let totalProtein = 0;
+            let totalCarbs = 0;
+            let totalFat = 0;
+            
+            ['breakfast', 'lunch', 'dinner'].forEach(meal => {
+                if (dayPlan[meal] && dayPlan[meal].nutrition) {
+                    const nutrition = dayPlan[meal].nutrition;
+                    
+                    // Find nutrients by name
+                    const calories = nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0;
+                    const protein = nutrition.nutrients.find(n => n.name === "Protein")?.amount || 0;
+                    const carbs = nutrition.nutrients.find(n => n.name === "Carbohydrates")?.amount || 0;
+                    const fat = nutrition.nutrients.find(n => n.name === "Fat")?.amount || 0;
+                    
+                    totalCalories += calories;
+                    totalProtein += protein;
+                    totalCarbs += carbs;
+                    totalFat += fat;
+                }
+            });
+            
+            // Update UI
+            document.getElementById(`${day}-calories`).textContent = Math.round(totalCalories);
+            document.getElementById(`${day}-protein`).textContent = Math.round(totalProtein);
+            document.getElementById(`${day}-carbs`).textContent = Math.round(totalCarbs);
+            document.getElementById(`${day}-fat`).textContent = Math.round(totalFat);
+        }
+        
+        // Initialize on page load
+        window.onload = function() {
+            // Check for an empty search box
+            if (document.getElementById('searchQuery').value === '') {
+                // Show a welcome message until the user searches
+                document.getElementById('recipes').innerHTML = `
+                    <div class="empty-state">
+                        <h3>Welcome to Kingplay Explorer!</h3>
+                        <p>Enter a keyword or use the filters above to find delicious recipes.</p>
+                    </div>
+                `;
+            }
+        };
+    </script>
+</body>
+</html>

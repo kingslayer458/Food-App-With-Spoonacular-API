@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kingplay Explorer - Your Personal Recipe Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #060505;
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(158, 146, 146, 0.977), rgba(0, 0, 0, 0.5)), 
+                        url('/api/placeholder/1200/800') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 1.2rem;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #ff5252;
+            transform: translateY(-5px);
+        }
+        
+        .features {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: rgba(203, 195, 195, 0.932);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
+            color: #040303;
+            line-height: 1.6;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>Kingplay Explorer</h1>
+        <p>Discover delicious recipes, plan your meals, and organize your favorite dishes all in one place. Take control of your cooking journey with our powerful recipe management tool.</p>
+        <a href="reci-app.html" class="cta-button">Start Exploring Recipes</a>
+    </section>
+    
+    <section class="features">
+        <h2>Discover What You Can Do</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Advanced Recipe Search</h3>
+                <p>Filter recipes by cuisine, diet preferences, ingredients, and preparation time to find exactly what you're looking for.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Meal Planning</h3>
+                <p>Plan your meals for the entire week with a comprehensive meal planner. Track nutritional information and preparation times.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Save Your Favorites</h3>
+                <p>Keep track of your favorite recipes in one convenient location so you can easily find them later.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>© 2025 Kingplay Explorer. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Add click event to CTA button
+        document.querySelector('.cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Normally this would navigate to recipe-app.html
+            // For demonstration purposes, show an alert
+            alert("This would take you to the recipe application.");
+            
+            // You can uncomment this line to actually navigate:
+             window.location.href = "reci-app.html";
+        });
+    </script>
+</body>
+</html>
