@@ -15,12 +15,123 @@
         body {
             background-color: #f5f5f5;
             color: #060505;
+            overflow-x: hidden;
         }
         
+        /* Preloader styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .cooking-pot {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .pot {
+            position: absolute;
+            width: 80px;
+            height: 50px;
+            background-color: #ff6b6b;
+            border-radius: 0 0 40px 40px;
+            bottom: 20px;
+            left: 20px;
+        }
+        
+        .pot:before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 20px;
+            background-color: #ff6b6b;
+            top: -10px;
+            left: -10px;
+            border-radius: 10px;
+        }
+        
+        .handle {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            border: 6px solid #ff6b6b;
+            border-radius: 10px;
+            right: 0;
+            top: 10px;
+        }
+        
+        .steam {
+            position: absolute;
+            width: 6px;
+            height: 30px;
+            background-color: #ddd;
+            border-radius: 3px;
+            bottom: 70px;
+            left: 35px;
+            opacity: 0;
+            animation: steam 1.5s infinite;
+        }
+        
+        .steam:nth-child(2) {
+            left: 50px;
+            height: 40px;
+            animation-delay: 0.2s;
+        }
+        
+        .steam:nth-child(3) {
+            left: 65px;
+            height: 35px;
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes steam {
+            0% {
+                transform: translateY(0) scaleX(1);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20px) scaleX(1.5);
+            }
+            95% {
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(-40px) scaleX(2);
+                opacity: 0;
+            }
+        }
+        
+        .loading-text {
+            position: absolute;
+            bottom: -30px;
+            font-size: 18px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        /* Original website styles */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(158, 146, 146, 0.977), rgba(0, 0, 0, 0.5)), 
-                        url('/api/placeholder/1200/800') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -28,6 +139,26 @@
             text-align: center;
             color: white;
             padding: 0 20px;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
         
         .hero h1 {
@@ -61,7 +192,14 @@
         }
         
         .features {
+            position: relative;
             padding: 80px 20px;
+            overflow: hidden;
+        }
+        
+        .features-content {
+            position: relative;
+            z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -70,7 +208,8 @@
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 60px;
-            color: #333;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .features-grid {
@@ -80,13 +219,14 @@
         }
         
         .feature-card {
-            background-color: rgba(203, 195, 195, 0.932);
+            background-color: rgba(255, 255, 255, 0.85);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s;
             padding: 30px;
             text-align: center;
+            backdrop-filter: blur(5px);
         }
         
         .feature-card:hover {
@@ -133,31 +273,57 @@
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="cooking-pot">
+            <div class="pot"></div>
+            <div class="handle"></div>
+            <div class="steam"></div>
+            <div class="steam"></div>
+            <div class="steam"></div>
+            <div class="loading-text">Cooking up goodness...</div>
+        </div>
+    </div>
+
     <section class="hero">
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="https://dqsmelvajm62e.cloudfront.net/foodvideo.mp4" type="video/mp4">
+            <!-- Add a fallback image if the video doesn't load -->
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
         <h1>Kingplay Explorer</h1>
         <p>Discover delicious recipes, plan your meals, and organize your favorite dishes all in one place. Take control of your cooking journey with our powerful recipe management tool.</p>
         <a href="reci-app.html" class="cta-button">Start Exploring Recipes</a>
     </section>
     
     <section class="features">
-        <h2>Discover What You Can Do</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3>Advanced Recipe Search</h3>
-                <p>Filter recipes by cuisine, diet preferences, ingredients, and preparation time to find exactly what you're looking for.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">📅</div>
-                <h3>Meal Planning</h3>
-                <p>Plan your meals for the entire week with a comprehensive meal planner. Track nutritional information and preparation times.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">❤️</div>
-                <h3>Save Your Favorites</h3>
-                <p>Keep track of your favorite recipes in one convenient location so you can easily find them later.</p>
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="https://d232xu2dthdxhk.cloudfront.net/video2.mp4" type="video/mp4">
+            <!-- Add a fallback image if the video doesn't load -->
+            Your browser does not support the video tag.
+        </video>
+        <div class="overlay"></div>
+        <div class="features-content">
+            <h2>Discover What You Can Do</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Advanced Recipe Search</h3>
+                    <p>Filter recipes by cuisine, diet preferences, ingredients, and preparation time to find exactly what you're looking for.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Meal Planning</h3>
+                    <p>Plan your meals for the entire week with a comprehensive meal planner. Track nutritional information and preparation times.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">❤️</div>
+                    <h3>Save Your Favorites</h3>
+                    <p>Keep track of your favorite recipes in one convenient location so you can easily find them later.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -167,6 +333,14 @@
     </footer>
     
     <script>
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            // Hide preloader after page is fully loaded
+            setTimeout(function() {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 1500); // Wait 1.5 seconds after page load to hide preloader
+        });
+        
         // Add click event to CTA button
         document.querySelector('.cta-button').addEventListener('click', function(e) {
             e.preventDefault();
@@ -176,7 +350,7 @@
             alert("This would take you to the recipe application.");
             
             // You can uncomment this line to actually navigate:
-             window.location.href = "reci-app.html";
+            window.location.href = "reci-app.html";
         });
     </script>
 </body>
