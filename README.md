@@ -4,7 +4,7 @@
 
 Kingplay Explorer is a simple and powerful **recipe management tool** that helps you **discover, plan, and organize** your favorite dishes with ease.
 
-🚀 **Live Demo:** [Kingplay Explorer](https://kingslayer458.github.io/kingplay-food-app-with-Spoonacular-API/)
+🚀 **Live Demo:** [Kingplay Explorer](https://kingslayer458.github.io/Food-App-With-Spoonacular-API/)
 
 ---
 
