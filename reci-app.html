@@ -247,6 +247,14 @@
             padding: 40px;
             color: #888;
         }
+        
+        .day-plan {
+            display: none;
+        }
+        
+        .day-plan.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -317,40 +325,283 @@
                     <button onclick="selectDay('sunday')">Sunday</button>
                 </div>
                 
-                <div class="day-plan" id="monday">
-                    <div class="meal-slot">
-                        <h3>Breakfast <button class="btn-small" onclick="clearMeal('monday', 'breakfast')">Clear</button></h3>
-                        <div class="meal-slot-content" id="monday-breakfast"></div>
+                <div id="day-plans-container">
+                    <!-- Monday -->
+                    <div class="day-plan active" id="monday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('monday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="monday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('monday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="monday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('monday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="monday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="monday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="monday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="monday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="monday-fat">0</span> g</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="meal-slot">
-                        <h3>Lunch <button class="btn-small" onclick="clearMeal('monday', 'lunch')">Clear</button></h3>
-                        <div class="meal-slot-content" id="monday-lunch"></div>
+                    <!-- Tuesday -->
+                    <div class="day-plan" id="tuesday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('tuesday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="tuesday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('tuesday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="tuesday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('tuesday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="tuesday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="tuesday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="tuesday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="tuesday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="tuesday-fat">0</span> g</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="meal-slot">
-                        <h3>Dinner <button class="btn-small" onclick="clearMeal('monday', 'dinner')">Clear</button></h3>
-                        <div class="meal-slot-content" id="monday-dinner"></div>
+                    <!-- Wednesday -->
+                    <div class="day-plan" id="wednesday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('wednesday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="wednesday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('wednesday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="wednesday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('wednesday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="wednesday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="wednesday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="wednesday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="wednesday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="wednesday-fat">0</span> g</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="nutritional-summary">
-                        <h3>Daily Nutrition Summary</h3>
-                        <div class="nutritional-details">
-                            <div class="nutritional-item">
-                                <div>Calories</div>
-                                <div><span id="monday-calories">0</span> kcal</div>
+                    <!-- Thursday -->
+                    <div class="day-plan" id="thursday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('thursday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="thursday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('thursday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="thursday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('thursday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="thursday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="thursday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="thursday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="thursday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="thursday-fat">0</span> g</div>
+                                </div>
                             </div>
-                            <div class="nutritional-item">
-                                <div>Protein</div>
-                                <div><span id="monday-protein">0</span> g</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Friday -->
+                    <div class="day-plan" id="friday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('friday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="friday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('friday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="friday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('friday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="friday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="friday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="friday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="friday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="friday-fat">0</span> g</div>
+                                </div>
                             </div>
-                            <div class="nutritional-item">
-                                <div>Carbs</div>
-                                <div><span id="monday-carbs">0</span> g</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Saturday -->
+                    <div class="day-plan" id="saturday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('saturday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="saturday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('saturday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="saturday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('saturday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="saturday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="saturday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="saturday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="saturday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="saturday-fat">0</span> g</div>
+                                </div>
                             </div>
-                            <div class="nutritional-item">
-                                <div>Fat</div>
-                                <div><span id="monday-fat">0</span> g</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Sunday -->
+                    <div class="day-plan" id="sunday-plan">
+                        <div class="meal-slot">
+                            <h3>Breakfast <button class="btn-small" onclick="clearMeal('sunday', 'breakfast')">Clear</button></h3>
+                            <div class="meal-slot-content" id="sunday-breakfast"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Lunch <button class="btn-small" onclick="clearMeal('sunday', 'lunch')">Clear</button></h3>
+                            <div class="meal-slot-content" id="sunday-lunch"></div>
+                        </div>
+                        
+                        <div class="meal-slot">
+                            <h3>Dinner <button class="btn-small" onclick="clearMeal('sunday', 'dinner')">Clear</button></h3>
+                            <div class="meal-slot-content" id="sunday-dinner"></div>
+                        </div>
+                        
+                        <div class="nutritional-summary">
+                            <h3>Daily Nutrition Summary</h3>
+                            <div class="nutritional-details">
+                                <div class="nutritional-item">
+                                    <div>Calories</div>
+                                    <div><span id="sunday-calories">0</span> kcal</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Protein</div>
+                                    <div><span id="sunday-protein">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Carbs</div>
+                                    <div><span id="sunday-carbs">0</span> g</div>
+                                </div>
+                                <div class="nutritional-item">
+                                    <div>Fat</div>
+                                    <div><span id="sunday-fat">0</span> g</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -495,39 +746,33 @@
             } else {
                 // Add to favorites
                 fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`)
-                    .then(response => response.json())
+                .then(response => response.json())
                     .then(recipe => {
                         favorites.push({
                             id: recipe.id,
                             title: recipe.title,
                             image: recipe.image,
+                            summary: recipe.summary,
                             readyInMinutes: recipe.readyInMinutes,
                             servings: recipe.servings,
-                            summary: recipe.summary,
-                            nutrition: recipe.nutrition
+                            calories: recipe.nutrition.nutrients.find(n => n.name === "Calories")?.amount || 'N/A'
                         });
-                        saveAndUpdateFavorites();
-                    });
-                return;
+                        saveFavorites();
+                        renderFavorites();
+                    })
+                    .catch(error => console.error('Error adding to favorites:', error));
             }
-            
-            saveAndUpdateFavorites();
+            saveFavorites();
+            renderFavorites();
+            searchRecipes();
         }
         
-        function saveAndUpdateFavorites() {
+        // Save favorites to localStorage
+        function saveFavorites() {
             localStorage.setItem('favorites', JSON.stringify(favorites));
-            
-            if (document.getElementById('favorites').classList.contains('active')) {
-                renderFavorites();
-            }
-            
-            // Also update the search results if visible
-            if (document.getElementById('search').classList.contains('active')) {
-                searchRecipes();
-            }
         }
         
-        // Render favorites list
+        // Render favorites
         function renderFavorites() {
             const favoritesList = document.getElementById('favorites-list');
             favoritesList.innerHTML = '';
@@ -546,19 +791,15 @@
                 const recipeElement = document.createElement('div');
                 recipeElement.classList.add('recipe-card');
                 
-                const calories = recipe.nutrition ? 
-                    Math.round(recipe.nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0) :
-                    'N/A';
-                
                 recipeElement.innerHTML = `
                     <img src="${recipe.image}" alt="${recipe.title}" class="recipe-image">
                     <div class="recipe-details">
                         <h3 class="recipe-title">${recipe.title}</h3>
                         <p class="recipe-description">${recipe.summary ? recipe.summary.split('. ')[0] + '.' : ''}</p>
                         <div class="recipe-meta">
-                            <span>⏱️ ${recipe.readyInMinutes || 'Unknown'} min</span>
-                            <span>👥 ${recipe.servings || '1'} servings</span>
-                            <span>🔥 ${calories} cal</span>
+                            <span>⏱️ ${recipe.readyInMinutes} min</span>
+                            <span>👥 ${recipe.servings} servings</span>
+                            <span>🔥 ${Math.round(recipe.calories)} cal</span>
                         </div>
                         <div class="action-buttons">
                             <button class="btn-small btn-favorite" onclick="toggleFavorite(${recipe.id})">Remove from Favorites</button>
@@ -571,132 +812,115 @@
             });
         }
         
-        // Meal Planning Functions
+        // Show add to meal plan modal (for simplicity, confirm prompt is used here)
+        function showAddToMealPlanModal(recipeId) {
+            const day = prompt('Enter the day (e.g., monday, tuesday, etc.):');
+            const mealType = prompt('Enter the meal type (breakfast, lunch, dinner):');
+            
+            if (day && mealType) {
+                addToMealPlan(day.toLowerCase(), mealType.toLowerCase(), recipeId);
+            }
+        }
+        
+        // Add recipe to meal plan
+        function addToMealPlan(day, mealType, recipeId) {
+            fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`)
+                .then(response => response.json())
+                .then(recipe => {
+                    mealPlan[day][mealType] = {
+                        id: recipe.id,
+                        title: recipe.title,
+                        image: recipe.image,
+                        calories: recipe.nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0,
+                        protein: recipe.nutrition.nutrients.find(n => n.name === "Protein")?.amount || 0,
+                        carbs: recipe.nutrition.nutrients.find(n => n.name === "Carbohydrates")?.amount || 0,
+                        fat: recipe.nutrition.nutrients.find(n => n.name === "Fat")?.amount || 0
+                    };
+                    saveMealPlan();
+                    renderMealPlan(day);
+                })
+                .catch(error => console.error('Error adding to meal plan:', error));
+        }
+        
+        // Save meal plan to localStorage
+        function saveMealPlan() {
+            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+        }
+        
+        // Render meal plan for a specific day
+        function renderMealPlan(day) {
+            document.querySelectorAll('.day-plan').forEach(plan => {
+                plan.classList.remove('active');
+            });
+            document.getElementById(`${day}-plan`).classList.add('active');
+            
+            const dayPlan = mealPlan[day];
+            ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
+                const mealSlot = document.getElementById(`${day}-${mealType}`);
+                mealSlot.innerHTML = '';
+                
+                if (dayPlan[mealType]) {
+                    const recipe = dayPlan[mealType];
+                    mealSlot.innerHTML = `
+                        <div class="meal-recipe">
+                            <img src="${recipe.image}" alt="${recipe.title}">
+                            <div>
+                                <h4>${recipe.title}</h4>
+                                <div>Calories: ${Math.round(recipe.calories)} kcal</div>
+                                <div>Protein: ${Math.round(recipe.protein)} g</div>
+                                <div>Carbs: ${Math.round(recipe.carbs)} g</div>
+                                <div>Fat: ${Math.round(recipe.fat)} g</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            updateNutritionalSummary(day);
+        }
+        
+        // Update nutritional summary for a specific day
+        function updateNutritionalSummary(day) {
+            const dayPlan = mealPlan[day];
+            let totalCalories = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0;
+            
+            ['breakfast', 'lunch', 'dinner'].forEach(mealType => {
+                if (dayPlan[mealType]) {
+                    totalCalories += dayPlan[mealType].calories;
+                    totalProtein += dayPlan[mealType].protein;
+                    totalCarbs += dayPlan[mealType].carbs;
+                    totalFat += dayPlan[mealType].fat;
+                }
+            });
+            
+            document.getElementById(`${day}-calories`).innerText = Math.round(totalCalories);
+            document.getElementById(`${day}-protein`).innerText = Math.round(totalProtein);
+            document.getElementById(`${day}-carbs`).innerText = Math.round(totalCarbs);
+            document.getElementById(`${day}-fat`).innerText = Math.round(totalFat);
+        }
+        
+        // Clear meal from meal plan
+        function clearMeal(day, mealType) {
+            mealPlan[day][mealType] = null;
+            saveMealPlan();
+            renderMealPlan(day);
+        }
+        
+        // Select a day for meal planning
         function selectDay(day) {
-            document.querySelectorAll('.day-selector button').forEach(btn => {
-                btn.classList.remove('active');
+            document.querySelectorAll('.day-selector button').forEach(button => {
+                button.classList.remove('active');
             });
             document.querySelector(`.day-selector button[onclick="selectDay('${day}')"]`).classList.add('active');
             renderMealPlan(day);
         }
         
-        function showAddToMealPlanModal(recipeId) {
-            // For simplicity, we'll just prompt for the day and meal
-            const day = prompt("Which day? (monday, tuesday, wednesday, thursday, friday, saturday, sunday)").toLowerCase();
-            if (!day || !Object.keys(mealPlan).includes(day)) {
-                alert("Invalid day selected");
-                return;
-            }
-            
-            const meal = prompt("Which meal? (breakfast, lunch, dinner)").toLowerCase();
-            if (!meal || !Object.keys(mealPlan[day]).includes(meal)) {
-                alert("Invalid meal selected");
-                return;
-            }
-            
-            addToMealPlan(recipeId, day, meal);
-        }
-        
-        function addToMealPlan(recipeId, day, meal) {
-            fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}&includeNutrition=true`)
-                .then(response => response.json())
-                .then(recipe => {
-                    mealPlan[day][meal] = {
-                        id: recipe.id,
-                        title: recipe.title,
-                        image: recipe.image,
-                        readyInMinutes: recipe.readyInMinutes,
-                        servings: recipe.servings,
-                        nutrition: recipe.nutrition
-                    };
-                    
-                    localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
-                    
-                    // Update the UI if the meal plan tab is active
-                    if (document.getElementById('meal-planning').classList.contains('active')) {
-                        renderMealPlan(day);
-                    }
-                });
-        }
-        
-        function clearMeal(day, meal) {
-            mealPlan[day][meal] = null;
-            localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
-            
-            // Update the UI
-            renderMealPlan(day);
-        }
-        
-        function renderMealPlan(day) {
-            const dayPlan = mealPlan[day];
-            
-            // Render each meal slot
-            ['breakfast', 'lunch', 'dinner'].forEach(meal => {
-                const slotElement = document.getElementById(`${day}-${meal}`);
-                
-                if (dayPlan[meal]) {
-                    const recipe = dayPlan[meal];
-                    slotElement.innerHTML = `
-                        <div class="meal-recipe">
-                            <img src="${recipe.image}" alt="${recipe.title}">
-                            <div>
-                                <h4>${recipe.title}</h4>
-                                <div>⏱️ ${recipe.readyInMinutes || 'Unknown'} min • 👥 ${recipe.servings || '1'} servings</div>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    slotElement.innerHTML = `
-                        <div class="empty-state">
-                            <p>No meal planned - add one from recipes or favorites</p>
-                        </div>
-                    `;
-                }
-            });
-            
-            // Calculate and update nutrition summary
-            let totalCalories = 0;
-            let totalProtein = 0;
-            let totalCarbs = 0;
-            let totalFat = 0;
-            
-            ['breakfast', 'lunch', 'dinner'].forEach(meal => {
-                if (dayPlan[meal] && dayPlan[meal].nutrition) {
-                    const nutrition = dayPlan[meal].nutrition;
-                    
-                    // Find nutrients by name
-                    const calories = nutrition.nutrients.find(n => n.name === "Calories")?.amount || 0;
-                    const protein = nutrition.nutrients.find(n => n.name === "Protein")?.amount || 0;
-                    const carbs = nutrition.nutrients.find(n => n.name === "Carbohydrates")?.amount || 0;
-                    const fat = nutrition.nutrients.find(n => n.name === "Fat")?.amount || 0;
-                    
-                    totalCalories += calories;
-                    totalProtein += protein;
-                    totalCarbs += carbs;
-                    totalFat += fat;
-                }
-            });
-            
-            // Update UI
-            document.getElementById(`${day}-calories`).textContent = Math.round(totalCalories);
-            document.getElementById(`${day}-protein`).textContent = Math.round(totalProtein);
-            document.getElementById(`${day}-carbs`).textContent = Math.round(totalCarbs);
-            document.getElementById(`${day}-fat`).textContent = Math.round(totalFat);
-        }
-        
-        // Initialize on page load
-        window.onload = function() {
-            // Check for an empty search box
-            if (document.getElementById('searchQuery').value === '') {
-                // Show a welcome message until the user searches
-                document.getElementById('recipes').innerHTML = `
-                    <div class="empty-state">
-                        <h3>Welcome to Kingplay Explorer!</h3>
-                        <p>Enter a keyword or use the filters above to find delicious recipes.</p>
-                    </div>
-                `;
-            }
-        };
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            searchRecipes();
+            renderFavorites();
+            renderMealPlan('monday');
+        });
     </script>
 </body>
 </html>
