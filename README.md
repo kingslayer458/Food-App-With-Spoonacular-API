@@ -28,3 +28,6 @@ Kingplay Explorer is a simple and powerful **recipe management tool** that helps
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/kingplay-explorer.git
+   
+![food UI](foooder.png)
+   
